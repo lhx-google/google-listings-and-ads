@@ -71,6 +71,20 @@ export function* getTargetAudience() {
 	yield fetchTargetAudience();
 }
 
-export function* getAdsCampaigns() {
-	yield fetchAdsCampaigns();
-}
+export const getAdsCampaigns = {
+	*fulfill() {
+		yield fetchAdsCampaigns();
+	},
+	shouldInvalidate( action ) {
+		return action.type === TYPES.PATCH_ADS_CAMPAIGN;
+	},
+};
+
+export const getAdsCampaign = {
+	*fulfill() {
+		yield fetchAdsCampaigns();
+	},
+	isFulfilled( state ) {
+		return Array.isArray( state.ads_campaigns );
+	},
+};

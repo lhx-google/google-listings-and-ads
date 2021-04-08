@@ -56,11 +56,18 @@ const AllProgramsTableCard = ( props ) => {
 	const {
 		data: finalCountryCodesData,
 	} = useTargetAudienceFinalCountryCodes();
-	const { data: adsCampaignsData } = useAdsCampaigns();
+	const {
+		data: adsCampaignsData,
+		loading: loadingAdsCampaigns,
+	} = useAdsCampaigns();
 	const map = useCountryKeyNameMap();
 	const { formatAmount } = useCurrencyFactory();
 
-	if ( ! finalCountryCodesData || ! adsCampaignsData ) {
+	if (
+		! finalCountryCodesData ||
+		! adsCampaignsData ||
+		loadingAdsCampaigns
+	) {
 		return <AppSpinner />;
 	}
 

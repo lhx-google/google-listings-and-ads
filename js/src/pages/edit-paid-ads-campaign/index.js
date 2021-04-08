@@ -3,23 +3,26 @@
  */
 import { getQuery, getNewPath } from '@woocommerce/navigation';
 import { __, sprintf } from '@wordpress/i18n';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
 import FullContainer from '.~/components/full-container';
 import TopBar from '.~/components/stepper/top-bar';
-import useApiFetchEffect from '.~/hooks/useApiFetchEffect';
 import AppSpinner from '.~/components/app-spinner';
 import EditPaidAdsCampaignForm from './edit-paid-ads-campaign-form';
+import { STORE_KEY } from '.~/data';
 
 const dashboardURL = getNewPath( {}, '/google/dashboard', {} );
 
 const EditPaidAdsCampaign = () => {
 	const { programId } = getQuery();
-	const { loading, error, data: campaignData } = useApiFetchEffect( {
-		path: `/wc/gla/ads/campaigns/${ programId }`,
+	const campaignData = useSelect( ( select ) => {
+		return select( STORE_KEY ).getAdsCampaign( Number( programId ) );
 	} );
+	const loading = campaignData === null;
+	const error = campaignData === undefined;
 
 	if ( loading ) {
 		return (

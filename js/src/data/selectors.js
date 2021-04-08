@@ -49,3 +49,11 @@ export const getTargetAudience = ( state ) => {
 export const getAdsCampaigns = ( state ) => {
 	return state.ads_campaigns;
 };
+
+export const getAdsCampaign = ( state, id ) => {
+	const { ads_campaigns: campaigns } = state;
+	if ( campaigns ) {
+		return campaigns.find( ( c ) => c.id === id );
+	}
+	return null;
+};

@@ -586,6 +586,28 @@ export function* fetchAdsCampaigns() {
 	}
 }
 
+export function* patchAdsCampaign( id, data ) {
+	try {
+		yield apiFetch( {
+			path: `/wc/gla/ads/campaigns/${ id }`,
+			method: 'PATCH',
+			data,
+		} );
+
+		return {
+			type: TYPES.PATCH_ADS_CAMPAIGN,
+		};
+	} catch ( error ) {
+		yield handleFetchError(
+			error,
+			__(
+				'Unable to update your paid ads campaign. Please try again later.',
+				'google-listings-and-ads'
+			)
+		);
+	}
+}
+
 export function receiveAdsCampaigns( adsCampaigns ) {
 	return {
 		type: TYPES.RECEIVE_ADS_CAMPAIGNS,
