@@ -7,10 +7,7 @@ import {
 	getDateParamsFromQuery,
 	isoDateFormat,
 } from '@woocommerce/date';
-// We are waiting for the release of the following fixes:
-// https://github.com/woocommerce/woocommerce-admin/issues/6890
-// https://github.com/woocommerce/woocommerce-admin/issues/6062
-// import { ReportFilters } from '@woocommerce/components';
+import { ReportFilters } from '@woocommerce/components';
 
 /**
  * Internal dependencies
@@ -22,7 +19,6 @@ import {
 import { programsFilter } from './filter-config';
 import useAdsCampaigns from '.~/hooks/useAdsCampaigns';
 import useStoreCurrency from '.~/hooks/useStoreCurrency';
-import ReportFilters from '.~/external-components/woocommerce/filters';
 
 // TODO: Consider importing it from something like '@woocommerce/wc-admin-settings'.
 const siteLocale = wcSettings.locale.siteLocale;
