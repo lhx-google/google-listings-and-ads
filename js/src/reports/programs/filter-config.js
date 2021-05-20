@@ -22,11 +22,7 @@ export const programsFilterConfig = ( adsCampaigns ) => {
 	];
 	const autocompleter = {
 		name: 'programs',
-		// Promise.resolve will not be needed after
-		// https://github.com/woocommerce/woocommerce-admin/issues/6061
-		options: () => {
-			return Promise.resolve( programsList );
-		},
+		options: programsList,
 		getOptionIdentifier: ( option ) => option.id,
 		getOptionLabel: ( option ) => option.name,
 		getOptionKeywords: ( option ) => [ option.name ],
