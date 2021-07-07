@@ -15,7 +15,7 @@ jobs:
       run: npm ci
 
     - name: Build
-      run: npm build
+      run: npm run build
 
     - name: Run bundlewatch
       run: npx bundlewatch
