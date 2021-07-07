@@ -17,9 +17,16 @@ jobs:
     - name: Build
       run: npm run build
 
+    # bundlewatch/ci-env does not support slashes in branch names, so we need to parse ref by ourselves to provide CI_BRANCH
+    - name: Extract branch name
+      shell: bash
+      run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+
     - name: Run bundlewatch
       run: npx bundlewatch
       env:
         BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
         CI_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+        CI_BRANCH: ${{ env.BRANCH_NAME }}
         CI_BRANCH_BASE: ${{ github.base_ref || 'trunk' }}
