@@ -1,0 +1,24 @@
+name: bundlewatch
+
+on: [push]
+
+jobs:
+  build:
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install npm dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm build
+
+    - name: Run bundlewatch
+      run: npx bundlewatch
+      env:
+        BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+        CI_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
