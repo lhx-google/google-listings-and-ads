@@ -1,6 +1,6 @@
 name: bundlewatch
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -22,3 +22,4 @@ jobs:
       env:
         BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
         CI_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+        CI_BRANCH_BASE: ${{ github.base_ref || 'trunk' }}
