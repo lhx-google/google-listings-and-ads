@@ -44,10 +44,10 @@ matrix:
       language: node_js # Takes version from `.nvmrc`, runs `npm ci` automatically.
       env: WP_VERSION="${WP_LATEST}" WC_VERSION="${WC_LATEST}" WP_TRAVISCI=jest WP_MULTISITE=0
       script: npm run test-unit
-    - name: "Coding standard check"
+    - name: "Coding standard & bundle size check"
       php: 7.4
       env: WP_VERSION="${WP_LATEST}" WC_VERSION="${WC_LATEST}" WP_TRAVISCI=cs WP_MULTISITE=0
-      script: npm ci && npm run lint
+      script: npm ci && npm run lint && npx bundlewatch
 
 before_install:
   - if [[ "${WP_TRAVISCI}" != "jest" ]]; then composer self-update --1; fi
