@@ -88,6 +88,7 @@ class JobServiceProvider extends AbstractServiceProvider {
 		$this->share_product_syncer_job( DeleteProducts::class );
 		$this->share_product_syncer_job( ResubmitExpiringProducts::class );
 		$this->share_product_syncer_job( CleanupProductsJob::class );
+    $this->share_product_syncer_job( UpdatePromotions::class );
 
 		$this->share_with_tags(
 			JobRepository::class,
